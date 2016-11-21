@@ -8,6 +8,27 @@
 (unless (package-installed-p 'clojure-mode)
   (package-install 'clojure-mode))
 
+(unless (package-installed-p 'projectile)
+  (package-install 'projectile))
+
+(setq projectile-indexing-method 'native)
+(projectile-global-mode)
+
+
+;; IDO search matcher
+(unless (package-installed-p 'flx-ido)
+  (package-install 'flx-ido))
+
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+
+
+
 (unless (package-installed-p 'cider)
   (package-install 'cider))
 
@@ -49,7 +70,9 @@
 ;; General Auto-Complete
 (require 'auto-complete-config)
 (setq ac-delay 0.0)
-(setq ac-quick-help-delay 0.5)
 (ac-config-default)
+(setq ac-quick-help-delay 0.5)
 
+;; LAZYNES for yes no questions
+(defalias 'yes-or-no-p 'y-or-n-p)
 
