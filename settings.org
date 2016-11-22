@@ -1,0 +1,191 @@
+#+Title
+
+* Package archives
+
+
+#+BEGIN_SRC emacs-lisp 
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
+
+;(package-refresh-contents )
+#+end_src
+* Clojure Development
+#+BEGIN_SRC emacs-lisp 
+
+(unless (package-installed-p 'clojure-mode)
+  (package-install 'clojure-mode))
+
+(unless (package-installed-p 'rainbow-mode)
+  (package-install 'rainbow-mode))
+
+(unless (package-installed-p 'rainbow-delimiters)
+  (package-install 'rainbow-delimiters))
+
+(unless (package-installed-p 'cider)
+  (package-install 'cider))
+
+(unless (package-installed-p 'paredit)
+  (package-install 'paredit))
+
+(unless (package-installed-p 'ac-cider)
+  (package-install 'ac-cider))
+
+;; Poping-up contextual documentation
+(eval-after-load "cider"
+  '(define-key cider-mode-map (kbd "C-c C-d") 'ac-cider-popup-doc))
+
+
+(require 'paredit)
+(add-hook 'clojure-mode-hook (lambda () (paredit-mode 1)))
+(add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode 1)))
+
+
+(show-paren-mode 0)
+
+;; rainbow delimiters
+(rainbow-delimiters-mode 1)
+
+
+#+end_src
+
+* Projectile
+
+#+BEGIN_SRC emacs-lisp Package archives
+
+
+(unless (package-installed-p 'projectile)
+  (package-install 'projectile))
+
+(setq projectile-indexing-method 'native)
+(projectile-global-mode)
+
+#+end_src
+
+* Auto Complete
+#+BEGIN_SRC emacs-lisp 
+
+(unless (package-installed-p 'auto-complete)
+  (package-install 'auto-complete))
+
+;; General Auto-Complete
+(require 'auto-complete-config)
+(setq ac-delay 0.0)
+(ac-config-default)
+(setq ac-quick-help-delay 0.5)
+
+#+end_src
+* FLX-IDO
+
+#+BEGIN_SRC emacs-lisp Package archives
+;; IDO search matcher
+(unless (package-installed-p 'flx-ido)
+  (package-install 'flx-ido))
+
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+
+
+#+end_src
+
+* Org Settings
+
+#+BEGIN_SRC emacs-lisp Package archives
+(unless (package-installed-p 'org-bullets)
+  (package-install 'org-bullets))
+
+(unless (package-installed-p 'org-journal)
+  (package-install 'org-journal))
+
+;; follow my TODOs in the journal
+
+(add-to-list 'org-agenda-files (expand-file-name org-journal-dir ))
+(setq org-agenda-file-regexp "\\`[^.].*\\.org'\\|[0-9]+")
+
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+;; org src sintax highlighting
+(setq org-src-fontify-natively t)
+#+end_src
+
+* Better defaults
+
+ Not shure why i need this ??
+
+#+BEGIN_SRC emacs-lisp Package archives
+(unless (package-installed-p 'better-defaults)
+  (package-install 'better-defaults))
+
+#+end_src
+
+* THEMES
+
+sublime themes and solarized
+
+#+BEGIN_SRC emacs-lisp Package archives
+
+(unless (package-installed-p 'sublime-themes)
+  (package-install 'sublime-themes))
+
+(unless (package-installed-p 'color-theme-solarized)
+  (package-install 'color-theme-solarized))
+
+;;(set-frame-parameter nil 'background-mode  'dark)
+;;(load-theme 'solarized t)
+
+(load-theme 'fogus t)
+
+#+end_src
+
+* FONTS, LINE Numbers
+
+#+BEGIN_SRC emacs-lisp Package archives
+
+(set-default-font "DejaVu Sans Mono-11")
+
+(global-linum-mode t)
+
+(setq linum-format "%4d \u2502")
+
+#+end_src
+* Shortcuts [F]...
+#+BEGIN_SRC emacs-lisp Package archives
+
+;; shortcuts
+(global-set-key [f5] 'cider-jack-in)
+(global-set-key [f6] 'paredit-mode)
+(global-set-key [f8] 'speedbar)
+
+
+#+end_src
+* Scrolling
+#+BEGIN_SRC emacs-lisp Package archives
+
+;; scroll one line at a time (less "jumpy" than defaults)
+
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+
+
+#+end_src
+* Yes and No questions 
+#+BEGIN_SRC emacs-lisp Package archives
+
+;; LAZYNES for yes no questions
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+#+END_SRC
+
+
+
