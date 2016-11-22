@@ -7,7 +7,7 @@
 + May inlcude Evil mode at some point in the future.
 
 
-# Purpose of this config
+## Purpose of this config
 
 Clojure development and journaling in org-journal
 
@@ -31,7 +31,7 @@ Very good font, I like it.
 
 All dependencies are pulled from Melpa. So this repo is all you need.
 
-# Conclusion
+## Conclusion
 
 It's very small, documented and I like it that way. #Deal_With_It
 
