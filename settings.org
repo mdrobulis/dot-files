@@ -41,7 +41,7 @@
 (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode 1)))
 
 
-(show-paren-mode 0)
+(show-paren-mode 1)
 
 ;; rainbow delimiters
 (rainbow-delimiters-mode 1)
