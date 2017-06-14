@@ -5,10 +5,11 @@
 
 #+BEGIN_SRC emacs-lisp 
 (require 'package)
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
-;(package-refresh-contents )
+(package-refresh-contents )
 #+end_src
 * Clojure Development
 #+BEGIN_SRC emacs-lisp 
@@ -130,16 +131,16 @@ sublime themes and solarized
 
 #+BEGIN_SRC emacs-lisp Package archives
 
-(unless (package-installed-p 'sublime-themes)
-  (package-install 'sublime-themes))
+;(unless (package-installed-p 'sublime-themes)
+;  (package-install 'sublime-themes))
 
 (unless (package-installed-p 'color-theme-solarized)
   (package-install 'color-theme-solarized))
 
-;;(set-frame-parameter nil 'background-mode  'dark)
-;;(load-theme 'solarized t)
+(set-frame-parameter nil 'background-mode  'dark)
+(load-theme 'solarized t)
 
-(load-theme 'fogus t)
+;(load-theme 'fogus t)
 
 #+end_src
 
