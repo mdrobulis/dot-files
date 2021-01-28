@@ -5,11 +5,10 @@
 
 #+BEGIN_SRC emacs-lisp 
 (require 'package)
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-(package-refresh-contents )
+;(package-refresh-contents )
 #+end_src
 * Clojure Development
 #+BEGIN_SRC emacs-lisp 
@@ -95,6 +94,7 @@
 #+end_src
 
 * Org Settings
+  SCHEDULED: <2021-01-28 Thu>
 
 #+BEGIN_SRC emacs-lisp Package archives
 (unless (package-installed-p 'org-bullets)
@@ -103,10 +103,15 @@
 (unless (package-installed-p 'org-journal)
   (package-install 'org-journal))
 
+
+(require 'org-journal)
+(setq org-journal-prefix-key "C-c C-j"
+      org-journal-date-format "%A, %d %B %Y")
+
 ;; follow my TODOs in the journal
 
-(add-to-list 'org-agenda-files (expand-file-name org-journal-dir ))
 (setq org-agenda-file-regexp "\\`[^.].*\\.org'\\|[0-9]+")
+(add-to-list 'org-agenda-files org-journal-dir)
 
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
@@ -131,16 +136,16 @@ sublime themes and solarized
 
 #+BEGIN_SRC emacs-lisp Package archives
 
-;(unless (package-installed-p 'sublime-themes)
-;  (package-install 'sublime-themes))
+(unless (package-installed-p 'sublime-themes)
+  (package-install 'sublime-themes))
 
-(unless (package-installed-p 'color-theme-solarized)
-  (package-install 'color-theme-solarized))
+;(unless (package-installed-p 'color-theme-solarized)
+;  (package-install 'color-theme-solarized))
 
-(set-frame-parameter nil 'background-mode  'dark)
-(load-theme 'solarized t)
+;(set-frame-parameter nil 'background-mode  'dark)
+;(load-theme 'solarized t)
 
-;(load-theme 'fogus t)
+(load-theme 'hickey t)
 
 #+end_src
 
@@ -190,3 +195,10 @@ sublime themes and solarized
 
 
 
+* Emacs Configs
+
+#+BEGIN_SRC emacs-lisp
+
+(setq inhibit-startup-screen t)
+(setq initial-scratch-message ";; Happy Hacking")
+#+end_src
