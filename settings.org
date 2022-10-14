@@ -4,12 +4,27 @@
 
 
 #+BEGIN_SRC emacs-lisp 
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-;(package-refresh-contents )
+					  ;(package-initialize)
+
+  ;(package-refresh-contents )
 #+end_src
+
+* OS switch
+
+#+BEGIN_SRC emacs-lisp 
+
+(defmacro with-system (type &rest body)
+  "Evaluate BODY if `system-type' equals TYPE."
+  (declare (indent defun))
+  `(when (eq system-type ',type)
+     ,@body))
+
+#+end_src
+
+
 * Clojure Development
 #+BEGIN_SRC emacs-lisp 
 
@@ -136,16 +151,19 @@ sublime themes and solarized
 
 #+BEGIN_SRC emacs-lisp Package archives
 
-(unless (package-installed-p 'sublime-themes)
-  (package-install 'sublime-themes))
 
-;(unless (package-installed-p 'color-theme-solarized)
-;  (package-install 'color-theme-solarized))
+ 
+  
+  (unless (package-installed-p 'sublime-themes)
+    (package-install 'sublime-themes))
 
-;(set-frame-parameter nil 'background-mode  'dark)
-;(load-theme 'solarized t)
+  ;(unless (package-installed-p 'color-theme-solarized)
+  ;  (package-install 'color-theme-solarized))
 
-(load-theme 'hickey t)
+  ;(set-frame-parameter nil 'background-mode  'dark)
+  ;(load-theme 'solarized t)
+
+  (load-theme 'hickey t)
 
 #+end_src
 
@@ -153,11 +171,17 @@ sublime themes and solarized
 
 #+BEGIN_SRC emacs-lisp Package archives
 
-(set-default-font "DejaVu Sans Mono-11")
+  (with-system darwin
+     (set-face-attribute 'default nil
+       :family "Fira Code" :height 145 :weight 'normal))
 
-(global-linum-mode t)
 
-(setq linum-format "%4d \u2502")
+  (with-system windows-nt
+      (set-default-font "DejaVu Sans Mono-11"))
+
+  (global-linum-mode t)
+
+  (setq linum-format "%4d \u2502")
 
 #+end_src
 * Shortcuts [F]...
