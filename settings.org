@@ -1,4 +1,4 @@
-#+Title
+#+Title Emacs settings;
 
 * Package archives
 
@@ -10,6 +10,10 @@
 					  ;(package-initialize)
 
   ;(package-refresh-contents )
+  (tool-bar-mode -1)   ; hide tool-bar up top
+  (scroll-bar-mode -1) ; hide scroll bar on left
+;  (menu-bar-mode -1)  ; hide top menu
+  
 #+end_src
 
 * OS switch
